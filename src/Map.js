@@ -3,6 +3,7 @@ import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import './App.css'
 import Header from './Header';
+import BackButton from './BackButton';
 
 // dotenv. 포트, DB 계정 정보, API 키 등을 외부 환경변수 파일로 관리할 수 있게 해주는 라이브러리
 import dotenv from "dotenv";
@@ -20,8 +21,6 @@ import {
 } from "react-google-maps";
 import Geocode from "react-geocode";
 
-// Devextreme Button
-import { Button } from 'devextreme-react/button';
 
 
 /*
@@ -215,20 +214,7 @@ class Map extends Component {
             }, (error) => {
                 console.error(error);
             });
-
-        //console.log("new lat: ", newLat);
     }
-    
-    /*
-    // 버튼을 클릭 → alert 창에 '위도', '경도', '주소' 출력
-    onClick = (event) => {
-        alert(
-            '위도 : ' + this.state.markerPositon.lat
-            + '\n경도 : ' + this.state.markerPositon.lng
-            + '\n주소 : ' + this.state.address
-        )
-    }
-    */
 
     render() {
 
@@ -270,7 +256,6 @@ class Map extends Component {
                         {/* 현재 시각, 이름, 상세주소 */}
                         <div className="form">
                             <div className="dx-fieldset">
-                                {/*<div className="dx-fieldset-header">Simple Field Set</div>*/}
                                 <div className="dx-field">
                                     <div className="dx-field-label">현재 시간:</div>
                                     <div className="dx-field-value-static"> 
@@ -300,23 +285,11 @@ class Map extends Component {
                                 </div>
                             </div>
                         </div>
-
-                        {/* '위치 제공 동의 및 근태 체크' 버튼 * /}
-                        <Button
-                            width={260}
-                            height={80}
-                            text="위치 제공 동의 및 근태 체크"
-                            type="default"
-                            stylingMode="outlined"
-                            onClick={this.onClick}
-                        ></Button>
-                        */}
                     </section>
 
                     <section>
                         {/* 지도 */}
                         <div className="flex-item">
-                            {/*<h3>Map</h3>*/}
                             <MapWithAMarker
                                 googleMapURL={googleMapURL}
                                 loadingElement={<div style={{ height: `100%` }} />}
@@ -326,6 +299,7 @@ class Map extends Component {
                         </div>
                     </section>
                 </main>
+                <BackButton></BackButton>
             </div>
         );
     }

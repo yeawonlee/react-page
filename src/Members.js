@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './Members.css';
 import Header from './Header';
+import BackButton from './BackButton';
 
 import DataGrid, { Scrolling, Pager, Paging, Column, Selection, Editing, Popup, Form } from 'devextreme-react/data-grid';
 import { CheckBox } from "devextreme-react/check-box";
@@ -169,6 +170,7 @@ class Members extends Component {
                         </div>
                     </section>
                 </main>
+                <BackButton></BackButton>
             </div>
         );
     }
