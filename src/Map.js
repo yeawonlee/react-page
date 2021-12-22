@@ -219,7 +219,7 @@ class Map extends Component {
         //console.log("new lat: ", newLat);
     }
     
-
+    /*
     // 버튼을 클릭 → alert 창에 '위도', '경도', '주소' 출력
     onClick = (event) => {
         alert(
@@ -228,7 +228,7 @@ class Map extends Component {
             + '\n주소 : ' + this.state.address
         )
     }
-
+    */
 
     render() {
 
@@ -264,7 +264,7 @@ class Map extends Component {
 
         return (
             <div className="App">
-                <Header title="클라우드메이트 임직원 근태 체크 시스템"></Header>
+                <Header title="Map"></Header>
                 <main>
                     <section>
                         {/* 현재 시각, 이름, 상세주소 */}
@@ -272,7 +272,7 @@ class Map extends Component {
                             <div className="dx-fieldset">
                                 {/*<div className="dx-fieldset-header">Simple Field Set</div>*/}
                                 <div className="dx-field">
-                                    <div className="dx-field-label">현재 시각:</div>
+                                    <div className="dx-field-label">현재 시간:</div>
                                     <div className="dx-field-value-static"> 
                                         <Clock
                                             format={'YYYY년 MM월 DD일 dddd, a h:mm:ss'}
@@ -287,13 +287,21 @@ class Map extends Component {
                                     <div className="dx-field-value-static"> 이예원 </div>
                                 </div>
                                 <div className="dx-field">
+                                    <div className="dx-field-label">위도 :</div>
+                                    <div className="dx-field-value-static"> {this.state.markerPositon.lat}</div>
+                                </div>
+                                <div className="dx-field">
+                                    <div className="dx-field-label">경도 :</div>
+                                    <div className="dx-field-value-static"> {this.state.markerPositon.lng}</div>
+                                </div>
+                                <div className="dx-field">
                                     <div className="dx-field-label">상세 주소 :</div>
                                     <div className="dx-field-value-static"> {this.state.address}</div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* '위치 제공 동의 및 근태 체크' 버튼 */}
+                        {/* '위치 제공 동의 및 근태 체크' 버튼 * /}
                         <Button
                             width={260}
                             height={80}
@@ -302,12 +310,13 @@ class Map extends Component {
                             stylingMode="outlined"
                             onClick={this.onClick}
                         ></Button>
+                        */}
                     </section>
 
                     <section>
                         {/* 지도 */}
                         <div className="flex-item">
-                            <h3>Map</h3>
+                            {/*<h3>Map</h3>*/}
                             <MapWithAMarker
                                 googleMapURL={googleMapURL}
                                 loadingElement={<div style={{ height: `100%` }} />}

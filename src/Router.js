@@ -11,8 +11,8 @@ class Router extends Component {
           <BrowserRouter>
               <Routes>
                   <Route exact path='/' element={<Home/>}></Route>
-                  <Route path='/members' element={<Members/>}></Route>
                   <Route path='/maps' element={<Map/>}></Route>
+                  <Route path='/members' element={<Members/>}></Route>
               </Routes>
           </BrowserRouter>
       );
