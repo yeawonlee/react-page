@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import './Members.css';
 import Header from './Header';
 import BackButton from './BackButton';
+import axios from "axios";
 
 import DataGrid, { Scrolling, Pager, Paging, Column, Selection, Editing, Popup, Form } from 'devextreme-react/data-grid';
 import { CheckBox } from "devextreme-react/check-box";
@@ -34,6 +35,94 @@ class Members extends Component {
 
         this.onSelectionChanged = this.onSelectionChanged.bind(this);
     }
+
+    // (GET) 전체 회원 조회
+    getMembers = async () => {
+        try {
+            const response = await axios.get("/spring-mvc/api/members");
+            this.setState({data: response.data});
+
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    // (GET) 특정 회원 조회
+    getMember = async () => {
+        try {
+            const response = await axios.get('/spring-mvc/api/members', {
+              params: {
+                // url/parameter
+                idx: 2
+              }
+            })
+            this.setState({data: response.data});
+
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    // (POST) 회원 등록
+    postMember = async () => {
+        try {
+            const response = await axios.post('/api/members', {
+              id: "idddd",
+              password: "1111",
+              name: "이름",
+              email: "eemail@naver.com"
+            })
+            this.setState({data: response.data});
+            
+        } catch (e) {
+            console.error(e);
+        }
+      };
+
+    // (PUT) 회원 정보 수정
+    putMember = async () => {
+        try {
+            const response = await axios.put('/spring-mvc/api/members', {
+              idx: 1,
+              id: "idid",
+              password: "0000",
+              name: "예원",
+              email: "000@naver.com"
+            })
+            this.setState({data: response.data});
+            
+        } catch (e) {
+            console.error(e);
+        }
+    };
+    
+    // (DLETE) 회원 삭제
+    deleteMember = async () => {
+        try {
+            const response = await axios.delete('/spring-mvc/api/members', {
+              params: {
+                // url/parameter
+                idx: 7
+              }
+            })
+            this.setState({data: response.data});
+            
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    componentDidMount () {
+
+        this.getMembers()
+
+        /*
+        // user id(userId)가 props를 통해 넘어온다고 가정하면,
+        const { userId } = this.props;
+        Ajax.getMember(userId);
+        */
+    }
+
 
     showPageSizeSelectorChange = (value) => {
         this.setState({
@@ -165,6 +254,17 @@ class Members extends Component {
                                         </p>
                                     </div>
                                 }
+
+                                {/*
+                                {
+                                    this.state.data && <div id="member-info">
+                                        <p className="member-notes">
+                                            {this.state.data}
+                                        </p>
+                                    </div>
+                                
+                                }
+                                */}
                             </React.Fragment>
 
                         </div>
