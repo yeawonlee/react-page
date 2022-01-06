@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Members from './Members'
 import Map from './Map';
+import MembersData from './MembersData';
 
 // 라우팅: 다른 주소에 다른 화면을 보여주는 것
 class Router extends Component {
@@ -15,6 +16,7 @@ class Router extends Component {
                   <Route exact path='/' element={<Home/>}></Route>
                   <Route path='/maps' element={<Map/>}></Route>
                   <Route path='/members' element={<Members/>}></Route>
+                  <Route path='/members-data' element={<MembersData/>}></Route>
               </Routes>
           </BrowserRouter>
       );
