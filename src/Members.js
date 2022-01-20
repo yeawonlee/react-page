@@ -10,30 +10,15 @@ import DataGrid, {
   Paging,
   Column,
   Editing,
-  Popup,
-  Form,
 } from "devextreme-react/data-grid";
 import { CheckBox } from "devextreme-react/check-box";
-import { Item } from "devextreme-react/form";
 
 /*
  * Record Paging (https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/RecordPaging/React/Light/)
- * Row Selection (https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/RowSelection/React/Light/)
- * Popup Editing (https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/PopupEditing/React/Light/)
+ * Row Editing and Editing Events (https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/RowEditingAndEditingEvents/React/Light/)
  */
 
 const allowedPageSizes = [5, 10, "all"];
-
-const isNotEmpty = (value) =>
-  value !== undefined && value !== null && value !== "";
-
-function handlerErrors(response) {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-}
-
 
 class Members extends Component {
   constructor(props) {
@@ -46,26 +31,32 @@ class Members extends Component {
 
       data: [],
     };
+
+    this.onRowInserting = (e) => {
+      this.postMember(e);
+    };
+
+    this.onRowUpdating = (e) => {
+      this.putMember(e);
+    };
+
+    this.onRowRemoving = (e) => {
+      this.deleteMember(e);
+    };
   }
 
   componentDidMount() {
     this.getMembers();
   }
 
+  // axios GET / POST / PUT / DELETE
+
   // (GET) 전체 회원 조회
   getMembers = async () => {
     try {
-      const response = await axios.get("/spring-mvc/api/members");
-      this.setState({ data: response.data });
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  // (GET) 특정 회원 조회
-  getMember = async () => {
-    try {
-      const response = await axios.get("/spring-mvc/api/members/3");
+      const response = await axios.get(
+        "https://www.yeawonlee.com/spring-mvc/api/members"
+      );
       this.setState({ data: response.data });
     } catch (e) {
       console.error(e);
@@ -73,32 +64,64 @@ class Members extends Component {
   };
 
   // (POST) 회원 등록
-  postMember = async () => {
+  postMember = async (e) => {
+    //onRowInserting 매개변수 data: 삽입해야 하는 행의 데이터
+    console.log(`post test data: ${e.data}`); // post test data: [object Object]
+
+    // ↓ 이거는 다 잘 출력됨
+    console.log(`e.data.idx: ${e.data.idx}`);
+    console.log(`e.data.id: ${e.data.id}`);
+    console.log(`e.data.password: ${e.data.password}`);
+    console.log(`e.data.name: ${e.data.name}`);
+    console.log(`e.data.email: ${e.data.email}`);
+
     try {
-      const response = await axios.post("/spring-mvc/api/members", {
-        id: "ID",
-        password: "2468",
-        name: "예원",
-        email: "lalala@naver.com",
-      });
+      //const response = await axios.post("/spring-mvc/api/members",  // 개발
+      const response = await axios.post("https://www.yeawonlee.com/spring-mvc/api/members",    // 배포
+        {
+          idx: e.data.idx,
+          id: e.data.id,
+          password: e.data.password,
+          name: e.data.name,
+          email: e.data.email,
+        }
+        /*,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }*/
+      );
+
       this.setState({ data: response.data });
+      console.log(response.data);
       this.getMembers();
     } catch (e) {
+      // 여기서 에러가 나는 듯. Network Error
       console.error(e);
     }
   };
 
   // (PUT) 회원 정보 수정
-  putMember = async () => {
+  putMember = async (e) => {
+    //onRowUpdating 매개변수 key: 행의 키
+    //onRowUpdating 매개변수 newData: 행의 업데이트된 데이터
+    console.log(`put test key: ${e.key}`); // put test key: 27(선택한 키 값)
+    console.log(`put test new data: ${e.newData}`); // put test new data: [object Object]
+
     try {
-      const response = await axios.put("/spring-mvc/api/members/36", {
-        idx: 36,
-        id: "ooo",
-        password: "0000",
-        name: "ooo",
-        email: "ooo@naver.com",
-      });
+      //const response = await axios.put(`/spring-mvc/api/members/${e.key}`, // 개발
+      const response = await axios.put(`https://www.yeawonlee.com/spring-mvc/api/members/${e.key}`,   // 배포
+        {
+          idx: e.oldData.idx,
+          id: (e.newData.id != null) ? e.newData.id : e.oldData.id,
+          password: (e.newData.password != null) ? e.newData.password : e.oldData.password,
+          name: (e.newData.name != null) ? e.newData.name : e.oldData.name,
+          email: (e.newData.email != null) ? e.newData.email : e.oldData.email
+        }
+      );
       this.setState({ data: response.data });
+      console.log(`data(state): ${this.state.data.data}`);
       this.getMembers();
     } catch (e) {
       console.error(e);
@@ -106,15 +129,23 @@ class Members extends Component {
   };
 
   // (DLETE) 회원 삭제
-  deleteMember = async () => {
+  deleteMember = async (e) => {
+    //onRowRemoving의 매개변수 key: 행의 키
+    console.log(`delete test key: ${e.key}`); // delete test key: 27(선택한 키 값)
     try {
-      const response = await axios.delete("/spring-mvc/api/members/38");
+      const response = await axios.delete(
+        `https://www.yeawonlee.com/spring-mvc/api/members/${e.key}`
+      );
       this.setState({ data: response.data });
       this.getMembers();
     } catch (e) {
       console.error(e);
     }
   };
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+
+  // page, nav button ...
 
   showPageSizeSelectorChange = (value) => {
     this.setState({
@@ -140,6 +171,8 @@ class Members extends Component {
   customizeColumns(columns) {
     columns[0].width = 70;
   }
+
+  /////////////////////////////////////////////////////////////////////////////////
 
   render() {
     return (
@@ -189,12 +222,21 @@ class Members extends Component {
                   showBorders={true}
                   hoverStateEnabled={true}
                   customizeColumns={this.customizeColumns}
+                  onRowInserting={this.onRowInserting}
+                  onRowUpdating={this.onRowUpdating}
+                  onRowRemoving={this.onRowRemoving}
                 >
-                  <Column dataField="idx" caption="No" width={70} />
-                  <Column dataField="id" />
-                  <Column dataField="password" />
-                  <Column dataField="name" />
-                  <Column dataField="email" />
+                  <Column
+                    dataField="idx"
+                    dataType="number"
+                    caption="No"
+                    width={70}
+                  />
+                  <Column dataField="id" dataType="string" />
+                  <Column dataField="password" dataType="string" />
+                  <Column dataField="name" dataType="string" />
+                  <Column dataField="email" dataType="string" />
+
                   <Scrolling rowRenderingMode="virtual"></Scrolling>
                   <Paging> defualtPageSize={10}</Paging>
 
@@ -207,27 +249,11 @@ class Members extends Component {
                   ></Pager>
 
                   <Editing
-                    mode="popup"
+                    mode="row"
                     allowAdding={true}
                     allowUpdating={true}
                     allowDeleting={true}
-                  >
-                    <Popup
-                      title="Member Info"
-                      showTitle={true}
-                      width={700}
-                      height={525}
-                    />
-                    <Form>
-                      <Item itemType="group" colCount={1} colSpan={2}>
-                        <Item dataField="No" />
-                        <Item dataField="ID" />
-                        <Item dataField="Password" />
-                        <Item dataField="Name" />
-                        <Item dataField="Email" />
-                      </Item>
-                    </Form>
-                  </Editing>
+                  ></Editing>
                 </DataGrid>
               </React.Fragment>
             </div>

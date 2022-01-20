@@ -268,10 +268,6 @@ class Map extends Component {
                                     </div>
                                 </div>
                                 <div className="dx-field">
-                                    <div className="dx-field-label">이름 :</div>
-                                    <div className="dx-field-value-static"> 이예원 </div>
-                                </div>
-                                <div className="dx-field">
                                     <div className="dx-field-label">위도 :</div>
                                     <div className="dx-field-value-static"> {this.state.markerPositon.lat}</div>
                                 </div>
