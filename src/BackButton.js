@@ -1,27 +1,20 @@
-import 'devextreme/dist/css/dx.common.css';
-import 'devextreme/dist/css/dx.light.css';
-import './App.css'
-import React, { Component } from 'react';
-import { Button } from 'devextreme-react/button';
+import "devextreme/dist/css/dx.common.css";
+import "devextreme/dist/css/dx.light.css";
+import "./App.css";
+import React from "react";
+import { Button } from "devextreme-react/button";
 
-class Header extends Component {
+const Header = () => {
+  const onClick = () => {
+    window.location.replace("/");
+    //window.location.href ="/";
+  };
 
-    onClick = () => {
-        window.location.replace("/");
-        //window.location.href ="/";
-    }
-
-    render() {
-        return (
-            <footer>
-                <Button
-                    id='icon-back'
-                    icon='back'
-                    onClick={this.onClick}
-                ></Button>
-            </footer>
-        );
-    }
-}
+  return (
+    <footer>
+      <Button id="icon-back" icon="back" onClick={onClick}></Button>
+    </footer>
+  );
+};
 
 export default Header;
