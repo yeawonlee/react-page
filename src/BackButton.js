@@ -4,7 +4,7 @@ import "./App.css";
 import React from "react";
 import { Button } from "devextreme-react/button";
 
-const Header = () => {
+const BackButton = () => {
   const onClick = () => {
     window.location.replace("/");
     //window.location.href ="/";
@@ -17,4 +17,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default BackButton;

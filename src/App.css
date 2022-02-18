@@ -2,10 +2,6 @@
   /*text-align: center;*/
 }
 
-header {
-  margin-left: 20px;
-}
-
 main {
   padding: 10px;
 }
@@ -76,7 +72,7 @@ footer {
 
 /* Home.js CSS*/
 .dx-toolbar {
-  background-color: rgba(191, 191, 191, 0.15);
+  background-color: rgba(85, 149, 222, 0.6);
   padding: 5px 10px;
 }
 

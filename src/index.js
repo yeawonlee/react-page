@@ -1,11 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Router from './Router';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import CssBaseline from "@mui/material/CssBaseline";
+import "./index.css";
 
 ReactDOM.render(
-    <Router />,
-  document.getElementById('root')
+  <BrowserRouter>
+    <CssBaseline/>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

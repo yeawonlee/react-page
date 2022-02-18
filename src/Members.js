@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Members.css";
-import Header from "./Header";
-import BackButton from "./BackButton";
 import axios from "axios";
 
 import DataGrid, {
@@ -12,6 +10,8 @@ import DataGrid, {
   Editing,
 } from "devextreme-react/data-grid";
 import { CheckBox } from "devextreme-react/check-box";
+
+//import { Outlet } from "react-router-dom";
 
 /*
  * Record Paging (https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/RecordPaging/React/Light/)
@@ -52,7 +52,7 @@ const Members = () => {
    * - 컴포넌트가 언마운트되기 전이나 업데이트되기 직전에 어떠한 작업을 수행하고 싶다면, useEffect에서 뒷정리(cleanup) 함수를 반환해 줘야 함
    * - 비동기적으로 동작한다.
    * - 주의할 점: useEffect에 등록하는 함수에 async 붙이면 X. ∵ useEffect에서 반환해야 하는 값은 뒷정리 함수.
-   * - 
+   * -
    */
   useEffect(() => {
     getMembers();
@@ -178,10 +178,13 @@ const Members = () => {
 
   return (
     <div className="App">
-      <Header title="Member list"></Header>
+      {/*<Outlet/>*/}
+
+      {/*<Header title="Member list"></Header>*/}
       <main>
         <section>
           <div>
+            <h1>Member list</h1>
             <div className="options">
               <div className="caption">Options</div>
               <div className="option-container">
@@ -260,7 +263,6 @@ const Members = () => {
           </div>
         </section>
       </main>
-      <BackButton></BackButton>
     </div>
   );
 };
