@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
     "devextreme": "^21.2.3",
+    "devextreme-aspnet-data-nojquery": "^2.8.6",
     "devextreme-react": "^21.2.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
