@@ -177,93 +177,89 @@ const Members = () => {
   };
 
   return (
-    <div className="App">
-      {/*<Outlet/>*/}
+    <main>
+      <section>
+        <div>
+          <h1>Member list</h1>
+          <div className="options">
+            <div className="caption">Options</div>
+            <div className="option-container">
+              <div className="option">
+                <CheckBox
+                  id="showPageSizes"
+                  text="Show Page Size Selector"
+                  value={showPageSizeSelector}
+                  onValueChange={showPageSizeSelectorChange}
+                ></CheckBox>
+              </div>
 
-      {/*<Header title="Member list"></Header>*/}
-      <main>
-        <section>
-          <div>
-            <h1>Member list</h1>
-            <div className="options">
-              <div className="caption">Options</div>
-              <div className="option-container">
-                <div className="option">
-                  <CheckBox
-                    id="showPageSizes"
-                    text="Show Page Size Selector"
-                    value={showPageSizeSelector}
-                    onValueChange={showPageSizeSelectorChange}
-                  ></CheckBox>
-                </div>
+              <div className="option">
+                <CheckBox
+                  id="showInfo"
+                  text="Show Info Text"
+                  value={showInfo}
+                  onValueChange={showInfoChange}
+                ></CheckBox>
+              </div>
 
-                <div className="option">
-                  <CheckBox
-                    id="showInfo"
-                    text="Show Info Text"
-                    value={showInfo}
-                    onValueChange={showInfoChange}
-                  ></CheckBox>
-                </div>
-
-                <div className="option">
-                  <CheckBox
-                    id="showNavButtons"
-                    text="Show Navigation Buttons"
-                    value={showNavButtons}
-                    onValueChange={showNavButtonsChange}
-                  ></CheckBox>
-                </div>
+              <div className="option">
+                <CheckBox
+                  id="showNavButtons"
+                  text="Show Navigation Buttons"
+                  value={showNavButtons}
+                  onValueChange={showNavButtonsChange}
+                ></CheckBox>
               </div>
             </div>
-
-            <React.Fragment>
-              <DataGrid
-                id="gridContainer"
-                dataSource={data}
-                RemoteOperations={true}
-                keyExpr="idx"
-                showBorders={true}
-                hoverStateEnabled={true}
-                customizeColumns={customizeColumns}
-                onRowInserting={onRowInserting}
-                onRowUpdating={onRowUpdating}
-                onRowRemoving={onRowRemoving}
-              >
-                <Column
-                  dataField="idx"
-                  dataType="number"
-                  caption="No"
-                  width={70}
-                />
-                <Column dataField="id" dataType="string" />
-                <Column dataField="password" dataType="string" />
-                <Column dataField="name" dataType="string" />
-                <Column dataField="email" dataType="string" />
-
-                <Scrolling rowRenderingMode="virtual"></Scrolling>
-                <Paging> defualtPageSize={10}</Paging>
-
-                <Pager
-                  visible={true}
-                  allowedPageSizes={allowedPageSizes}
-                  showPageSizeSelector={showPageSizeSelector}
-                  showInfo={showInfo}
-                  showNavigationButtons={showNavButtons}
-                ></Pager>
-
-                <Editing
-                  mode="row"
-                  allowAdding={true}
-                  allowUpdating={true}
-                  allowDeleting={true}
-                ></Editing>
-              </DataGrid>
-            </React.Fragment>
           </div>
-        </section>
-      </main>
-    </div>
+
+          <React.Fragment>
+            <DataGrid
+              id="gridContainer"
+              dataSource={data}
+              RemoteOperations={true}
+              keyExpr="idx"
+              showBorders={true}
+              hoverStateEnabled={true}
+              columnAutoWidth={true}
+              customizeColumns={customizeColumns}
+              onRowInserting={onRowInserting}
+              onRowUpdating={onRowUpdating}
+              onRowRemoving={onRowRemoving}
+            >
+              <Column
+                dataField="idx"
+                dataType="number"
+                caption="No"
+                width={70}
+              />
+              <Column dataField="id" dataType="string" />
+              <Column dataField="password" dataType="string" />
+              <Column dataField="name" dataType="string" />
+              <Column dataField="email" dataType="string" />
+
+              <Scrolling rowRenderingMode="virtual"></Scrolling>
+              <Paging> defualtPageSize={10}</Paging>
+
+              <Pager
+                visible={true}
+                allowedPageSizes={allowedPageSizes}
+                showPageSizeSelector={showPageSizeSelector}
+                showInfo={showInfo}
+                showNavigationButtons={showNavButtons}
+              ></Pager>
+
+              <Editing
+                mode="row"
+                allowAdding={true}
+                allowUpdating={true}
+                allowDeleting={true}
+              ></Editing>
+            </DataGrid>
+          </React.Fragment>
+        </div>
+      </section>
+    </main>
   );
 };
 

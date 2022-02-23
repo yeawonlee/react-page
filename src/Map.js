@@ -243,61 +243,52 @@ const Map = () => {
   );
 
   return (
-    <div className="App">
-      {/*<Outlet/>*/}
+    <main>
+      <section>
+        <h1>Map</h1>
 
-      {/*<Header title="Map"></Header>*/}
-      <main>
-        <section>
-          <h1>Map</h1>
-
-          {/* 현재 시각, 이름, 상세주소 */}
-          <div className="form">
-            <div className="dx-fieldset">
-              <div className="dx-field">
-                <div className="dx-field-label">현재 시간:</div>
-                <div className="dx-field-value-static">
-                  <Clock
-                    format={"YYYY년 MM월 DD일 dddd, a h:mm:ss"}
-                    ticking={true}
-                    timezone={"Asia/Seoul"}
-                    locale={"ko"}
-                  ></Clock>
-                </div>
-              </div>
-              <div className="dx-field">
-                <div className="dx-field-label">위도 :</div>
-                <div className="dx-field-value-static">
-                  {markerPosition.lat}
-                </div>
-              </div>
-              <div className="dx-field">
-                <div className="dx-field-label">경도 :</div>
-                <div className="dx-field-value-static">
-                  {markerPosition.lng}
-                </div>
-              </div>
-              <div className="dx-field">
-                <div className="dx-field-label">상세 주소 :</div>
-                <div className="dx-field-value-static">{address}</div>
+        {/* 현재 시각, 이름, 상세주소 */}
+        <div className="form">
+          <div className="dx-fieldset">
+            <div className="dx-field">
+              <div className="dx-field-label">현재 시간:</div>
+              <div className="dx-field-value-static">
+                <Clock
+                  format={"YYYY년 MM월 DD일 dddd, a h:mm:ss"}
+                  ticking={true}
+                  timezone={"Asia/Seoul"}
+                  locale={"ko"}
+                ></Clock>
               </div>
             </div>
+            <div className="dx-field">
+              <div className="dx-field-label">위도 :</div>
+              <div className="dx-field-value-static">{markerPosition.lat}</div>
+            </div>
+            <div className="dx-field">
+              <div className="dx-field-label">경도 :</div>
+              <div className="dx-field-value-static">{markerPosition.lng}</div>
+            </div>
+            <div className="dx-field">
+              <div className="dx-field-label">상세 주소 :</div>
+              <div className="dx-field-value-static">{address}</div>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section>
-          {/* 지도 */}
-          <div className="flex-item">
-            <MapWithAMarker
-              googleMapURL={googleMapURL}
-              loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `400px` }} />}
-              mapElement={<div style={{ height: `100%` }} />}
-            />
-          </div>
-        </section>
-      </main>
-    </div>
+      <section>
+        {/* 지도 */}
+        <div className="flex-item">
+          <MapWithAMarker
+            googleMapURL={googleMapURL}
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+          />
+        </div>
+      </section>
+    </main>
   );
 };
 
