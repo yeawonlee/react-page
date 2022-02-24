@@ -10,6 +10,12 @@ import "./Charts.css";
 import { data } from "./DoughnutChart_data";
 import CenterTemplate from "./CenterTemplate";
 
+/**
+ * [ Doughnut Chart ]
+ * - Custom Label in the Center (https://js.devexpress.com/Demos/WidgetsGallery/Demo/Charts/DoughnutWithCustomLabelInCenter/React/Light/)
+ * - Doughnut Selection (https://js.devexpress.com/Demos/WidgetsGallery/Demo/Charts/DoughnutSelection/React/Light/)
+*/
+
 const countries = Array.from(new Set(data.map((item) => item.country)));
 
 const DoughnutChart = () => {
@@ -32,7 +38,9 @@ const DoughnutChart = () => {
       centerRender={CenterTemplate}
       type="doughnut"
       onPointClick={poinClickHandler}
+      /*width='800'*/
     >
+      
       <Series argumentField="commodity" valueField="total">
         <HoverStyle color="#ffd700" />
         <Label
@@ -45,7 +53,7 @@ const DoughnutChart = () => {
         </Label>
       </Series>
       <Legend
-        margin={0}
+        /*margin={-100}*/
         horizontalAlignment="right"
         verticalAlignment="top"
       ></Legend>

@@ -7,14 +7,19 @@ import PieChart, {
   Connector,
 } from "devextreme-react/pie-chart";
 import DoughnutChart from "./DoughnutChart";
+import DiscreteDataChart from "./DiscreteDataChart";
 import BarChart from "./BarChart";
+import SplineChart from "./SplineChart";
+import "./Charts.css"
 
 const ChartTest = () => {
 
   return (
     <div className="flex-container">
       <DoughnutChart/>
+      <DiscreteDataChart/>
       <BarChart/>
+      <SplineChart/>
     </div>
   );
 };
