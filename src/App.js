@@ -34,18 +34,18 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import { useNavigate } from "react-router-dom";
 
-import ChangeTheme from "./ChangeTheme";
-import ChangeThemeButton from "./ChangeThemeButton";
+import ChangeTheme from "./components/Theme/ChangeTheme";
+import ChangeThemeButton from "./components/Theme/ChangeThemeButton";
 
 import { Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import Members from "./Members";
-import Map from "./Map";
-import GridTest from "./GridTest";
-import PivotGridTest from "./PivotGridTest";
-import ChartTest from "./ChartTest";
-import Editors from "./Editors";
-import Footer from "./Footer";
+import Home from "./pages/Home/Home";
+import Members from "./pages/MemberList/Members";
+import Map from "./pages/Map/Map";
+import GridTest from "./pages/Grid/GridTest";
+import PivotGridTest from "./pages/PivotGrid/PivotGridTest";
+import ChartTest from "./pages/Charts/ChartTest";
+import Editors from "./pages/Editors/Editors";
+import Footer from "./containers/Footer";
 import "./App.css";
 import { ListItemIcon } from "@mui/material";
 
@@ -196,182 +196,187 @@ const App = (props) => {
   };
 
   return (
-    <div className="App">
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        {/* Drawer Demo Code */}
-        <AppBar position="fixed" open={open}>
-          <Container maxWidth="x1">
-            <Toolbar disableGutters>
-              {/* LOGO 이미지 */}
-              <Box sx={{ mr: 2, display: "flex" }}>
-                <img alt="LOGO" src="img/cloud-computing.png" width={60} />
-              </Box>
+    <div className="page-container">
+      <div className="content-wrap">
+        <Box sx={{ display: "flex" }}>
+          <CssBaseline />
+          {/* Drawer Demo Code */}
+          <AppBar position="fixed" open={open}>
+            <Container maxWidth="x1">
+              <Toolbar disableGutters>
+                {/* LOGO 이미지 */}
+                <Box sx={{ mr: 2, display: "flex" }}>
+                  <img alt="LOGO" src="img/cloud-computing.png" width={60} />
+                </Box>
 
-              {/* Menu 아이콘 */}
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                sx={{
-                  marginRight: "36px",
-                  ...(open && { display: "none" }),
-                }}
-              >
-                <MenuIcon />
-              </IconButton>
-
-              {/* 상단 메뉴 (Products, Pricing, Blog) */}
-              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                <Menu
-                  id="menu"
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                  }}
+                {/* Menu 아이콘 */}
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  edge="start"
                   sx={{
-                    display: { xs: "block", md: "none" },
+                    marginRight: "36px",
+                    ...(open && { display: "none" }),
                   }}
                 >
-                  {pages.map((page) => (
-                    <MenuItem key={page}>
-                      <Typography textAlign="center">{page}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
+                  <MenuIcon />
+                </IconButton>
 
-              <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                {pages.map((page) => (
-                  <Button
-                    key={page}
-                    sx={{ my: 2, color: "white", display: "block" }}
+                {/* 상단 메뉴 (Products, Pricing, Blog) */}
+                <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                  <Menu
+                    id="menu"
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                    sx={{
+                      display: { xs: "block", md: "none" },
+                    }}
                   >
-                    {page}
-                  </Button>
-                ))}
-              </Box>
+                    {pages.map((page) => (
+                      <MenuItem key={page}>
+                        <Typography textAlign="center">{page}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
 
-              {/* 테마 변경 아이콘  */}
-              <Box
-                sx={{
-                  mx: 2,
-                  flexGrow: 0,
-                  display: { xs: "none", md: "flex" },
-                }}
-              >
-                <ChangeThemeButton />
-              </Box>
-
-              {/* 사용자 정보  */}
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-            </Toolbar>
-          </Container>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "rtl" ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
-
-          <Divider />
-
-          <List>
-            {itemList.map((item, index) => {
-              const { icon, text, onClick } = item;
-              return (
-                <ListItem button key={text} onClick={onClick}>
-                  {icon && <ListItemIcon>{icon}</ListItemIcon>}
-                  <ListItemText primary={text} />
-                </ListItem>
-              );
-            })}
-
-            {/* UI Component Test 메뉴 */}
-            <ListItem>
-              <ListItemIcon>
-                <ArchiveIcon />
-              </ListItemIcon>
-              <ListItemText primary="UI Component Test" onClick={handleClick} />
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                {UIConponentItemList.map((item) => {
-                  const { icon, text, onClick } = item;
-                  return (
-                    <ListItem
-                      button
-                      key={text}
-                      onClick={onClick}
-                      sx={{ pl: 8 }}
+                <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+                  {pages.map((page) => (
+                    <Button
+                      key={page}
+                      sx={{ my: 2, color: "white", display: "block" }}
                     >
-                      {icon && <ListItemIcon>{icon}</ListItemIcon>}
-                      <ListItemText primary={text} />
-                    </ListItem>
-                  );
-                })}
-              </List>
-            </Collapse>
-          </List>
-        </Drawer>
+                      {page}
+                    </Button>
+                  ))}
+                </Box>
 
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <DrawerHeader />
-          <Routes>
-            <Route path="/" element={<Home title="Home Page" />}></Route>
-            <Route path="/maps" element={<Map />}></Route>
-            <Route path="/members" element={<Members />}></Route>
-            <Route path="/grids" element={<GridTest />}></Route>
-            <Route path="/pivot-grids" element={<PivotGridTest />}></Route>
-            <Route path="/charts" element={<ChartTest />}></Route>
-            <Route path="/editors" element={<Editors />}></Route>
-          </Routes>
-          <Footer />
+                {/* 테마 변경 아이콘  */}
+                <Box
+                  sx={{
+                    mx: 2,
+                    flexGrow: 0,
+                    display: { xs: "none", md: "flex" },
+                  }}
+                >
+                  <ChangeThemeButton />
+                </Box>
+
+                {/* 사용자 정보  */}
+                <Box sx={{ flexGrow: 0 }}>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="/static/images/avatar/2.jpg"
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "45px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map((setting) => (
+                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+              </Toolbar>
+            </Container>
+          </AppBar>
+          <Drawer variant="permanent" open={open}>
+            <DrawerHeader>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === "rtl" ? (
+                  <ChevronRightIcon />
+                ) : (
+                  <ChevronLeftIcon />
+                )}
+              </IconButton>
+            </DrawerHeader>
+
+            <Divider />
+
+            <List>
+              {itemList.map((item, index) => {
+                const { icon, text, onClick } = item;
+                return (
+                  <ListItem button key={text} onClick={onClick}>
+                    {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+              })}
+
+              {/* UI Component Test 메뉴 */}
+              <ListItem>
+                <ListItemIcon>
+                  <ArchiveIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="UI Component Test"
+                  onClick={handleClick}
+                />
+                {open ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {UIConponentItemList.map((item) => {
+                    const { icon, text, onClick } = item;
+                    return (
+                      <ListItem
+                        button
+                        key={text}
+                        onClick={onClick}
+                        sx={{ pl: 8 }}
+                      >
+                        {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                        <ListItemText primary={text} />
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </Collapse>
+            </List>
+          </Drawer>
+
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <DrawerHeader />
+            <Routes>
+              <Route path="/" element={<Home title="Home Page" />}></Route>
+              <Route path="/maps" element={<Map />}></Route>
+              <Route path="/members" element={<Members />}></Route>
+              <Route path="/grids" element={<GridTest />}></Route>
+              <Route path="/pivot-grids" element={<PivotGridTest />}></Route>
+              <Route path="/charts" element={<ChartTest />}></Route>
+              <Route path="/editors" element={<Editors />}></Route>
+            </Routes>
+          </Box>
         </Box>
-      </Box>
+      </div>
+      <Footer />
     </div>
   );
 };

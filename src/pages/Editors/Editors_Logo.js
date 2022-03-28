@@ -2,7 +2,7 @@ import React from "react";
 
 const Editors_Logo = (props) => {
   /*const { props } = this;*/
-  console.log(props);
+  //console.log(props);
   /*
     border: false
     color: "#f05b41"
@@ -11,7 +11,7 @@ const Editors_Logo = (props) => {
     transform: "scaleX(1)"
     width: 370
    */
-  console.log(props.text); // UI Superhero
+  //console.log(props.text); // UI Superhero
   //console.log(props.editorStates); // undefined
 
   /*

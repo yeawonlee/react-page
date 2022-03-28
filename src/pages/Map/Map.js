@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "devextreme/dist/css/dx.common.css";
 import "devextreme/dist/css/dx.light.css";
-import "./App.css";
+//import "./App.css";
 
 // dotenv. 포트, DB 계정 정보, API 키 등을 외부 환경변수 파일로 관리할 수 있게 해주는 라이브러리
 import dotenv from "dotenv";
