@@ -80,22 +80,20 @@ const dataSource = {
 
 const PivotGridTest = () => {
   return (
-    <main>
-      <section>
-        <h1>Pivot Grid Test</h1>
-        <PivotGrid
-          allowSorting={true}
-          allowSortingBySummary={true}
-          allowFiltering={true}
-          height={620}
-          showBorders={true}
-          rowHeaderLayout="tree"
-          dataSource={dataSource}
-        >
-          <Scrolling mode="virtual" />
-        </PivotGrid>
-      </section>
-    </main>
+    <>
+      <h1>Pivot Grid Test</h1>
+      <PivotGrid
+        allowSorting={true}
+        allowSortingBySummary={true}
+        allowFiltering={true}
+        height={620}
+        showBorders={true}
+        rowHeaderLayout="tree"
+        dataSource={dataSource}
+      >
+        <Scrolling mode="virtual" />
+      </PivotGrid>
+    </>
   );
 };
 

@@ -54,6 +54,7 @@ class Editors extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <h1>Editor</h1>
         <div className="settings">
           <div className="column">
             <div className="field">

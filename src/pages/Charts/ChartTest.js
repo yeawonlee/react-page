@@ -10,17 +10,19 @@ import DoughnutChart from "./DoughnutChart";
 import DiscreteDataChart from "./DiscreteDataChart";
 import BarChart from "./BarChart";
 import SplineChart from "./SplineChart";
-import "./Charts.css"
+import "./Charts.css";
 
 const ChartTest = () => {
-
   return (
-    <div className="flex-container">
-      <DoughnutChart/>
-      <DiscreteDataChart/>
-      <BarChart/>
-      <SplineChart/>
-    </div>
+    <>
+      <h1>Charts</h1>
+      <div className="flex-container">
+        <DoughnutChart />
+        <DiscreteDataChart />
+        <BarChart />
+        <SplineChart />
+      </div>
+    </>
   );
 };
 

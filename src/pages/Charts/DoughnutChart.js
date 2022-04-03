@@ -61,7 +61,7 @@ const DoughnutChart = () => {
   ));
 
   return (
-    <section>
+    <>
       <h1>Doughnut Chart</h1>
       <div>
         <div className="long-title">
@@ -69,7 +69,7 @@ const DoughnutChart = () => {
         </div>
         <div className="pies-container">{pies}</div>
       </div>
-    </section>
+    </>
   );
 };
 

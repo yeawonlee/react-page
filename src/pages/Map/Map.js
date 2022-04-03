@@ -243,10 +243,9 @@ const Map = () => {
   );
 
   return (
-    <main>
+    <>
+      <h1>Map</h1>
       <section>
-        <h1>Map</h1>
-
         {/* 현재 시각, 이름, 상세주소 */}
         <div className="form">
           <div className="dx-fieldset">
@@ -288,7 +287,7 @@ const Map = () => {
           />
         </div>
       </section>
-    </main>
+    </>
   );
 };
 
